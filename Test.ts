@@ -3,10 +3,34 @@ import Tests from "./tests";
 import Browser from "./Browser";
 import TestInterface from "./Interfaces/TestInterface";
 import TestActionInterface from "./Interfaces/TestActionInterface";
+import { TYPES } from "./constants";
 
 
 const runAction = async (Session: Browser, action: TestActionInterface) => {
   console.log("Running action", action.name);
+
+  switch (action.name) {
+    case TYPES.FILL:
+      (action.content as Array<[string, string]>).forEach(async (state) => {
+        if (state.constructor === Array) {
+          await Session.fill(state[0], state[1]);
+        }
+      });
+      break;
+
+    case TYPES.CLICK:
+      await Session.click(action.content);
+      break;
+
+    case TYPES.WAIT:
+      await new Promise((resolve) => {
+        setTimeout(() => resolve(), action.await);
+      });
+      break;
+
+    default:
+      break;
+  }
 };
 
 const runNextAction = async (Session: Browser, actions: TestActionInterface[], key: number) => {

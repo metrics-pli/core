@@ -1,4 +1,5 @@
 export default interface TestActionInterface {
-  name: "fill" | "click";
+  name: string;
   content?: Array<[string, string]> | string[];
+  await?: number;
 }
