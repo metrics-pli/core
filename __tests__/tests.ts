@@ -1,27 +1,27 @@
-import TestInterface from "./Interfaces/TestInterface";
-import { TYPES } from "./constants";
+import { TYPES } from "../constants";
+import TestInterface from "../Interfaces/TestInterface";
 
 const tests: TestInterface[] = [{
-  url: "https://npmjs.com"
+  url: "https://npmjs.com",
 }, {
-  url: "https://www.npmjs.com/login",
   actions: [{
-    name: TYPES.FILL,
     content: [
       ["#login_username", "___test___"],
       ["#login_password", "thisisthetestaccount"],
     ],
+    name: TYPES.FILL,
   }, {
-    name: TYPES.CLICK,
     content: [
       "#login [type=\"submit\"",
     ],
+    name: TYPES.CLICK,
   }, {
-    name: TYPES.WAIT,
     await: 3000,
+    name: TYPES.WAIT,
   }],
+  url: "https://www.npmjs.com/login",
 }, {
-  url: "https://www.npmjs.com/package/lodash"
+  url: "https://www.npmjs.com/package/lodash",
 }];
 
 export default tests;

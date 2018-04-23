@@ -1,10 +1,13 @@
+import * as EventEmitter from "events";
 import * as puppeteer from "puppeteer";
 
-export default class Browser {
+export default class Browser extends EventEmitter {
   private browser;
   private page;
 
-  constructor() {}
+  constructor() {
+    super();
+  }
 
   public async start() {
     try {
@@ -12,12 +15,12 @@ export default class Browser {
         headless: false,
       });
       this.page = await this.browser.newPage();
-    } catch(error) {
+    } catch (error) {
       this.throw(error);
     }
   }
 
-  public async open(url: String) {
+  public async open(url: string) {
     try {
       await this.page.goto(url);
     } catch (error) {
@@ -35,7 +38,7 @@ export default class Browser {
   }
 
   public async measure(): Promise<object> {
-    const resultString = await this.page.evaluate(_ => {
+    const resultString = await this.page.evaluate((_) => {
       return JSON.stringify(window.performance.timing);
     });
 
@@ -51,7 +54,7 @@ export default class Browser {
     }
   }
 
-  throw(error) {
-    console.error(error);
+  public throw(error) {
+    super.emit("error", error);
   }
-};
+}

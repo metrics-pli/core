@@ -1,5 +1,5 @@
 export const TYPES = {
-  FILL: "fill",
   CLICK: "click",
+  FILL: "fill",
   WAIT: "wait",
 };

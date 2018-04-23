@@ -1,7 +1,7 @@
 {
   "defaultSeverity": "error",
   "extends": [
-    "tslint-config-micro-tools"
+    "tslint:recommended"
   ],
   "jsRules": {},
   "rules": {
