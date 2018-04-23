@@ -4,7 +4,7 @@ import Browser from "./Browser";
 import TestInterface from "./Interfaces/TestInterface";
 import TestActionInterface from "./Interfaces/TestActionInterface";
 import { TYPES } from "./constants";
-
+import Store from "./Store";
 
 const runAction = async (Session: Browser, action: TestActionInterface) => {
   console.log("Running action", action.name);
@@ -46,7 +46,8 @@ const runTest = async (Session: Browser, test: TestInterface) => {
 
   await Session.open(test.url);
 
-  // Measure here
+  const performanceData = await Session.measure()
+  Store.set(test.url, performanceData)
 
   if (test.actions) {
     runNextAction(Session, test.actions, 0);

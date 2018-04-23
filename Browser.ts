@@ -6,7 +6,7 @@ export default class Browser {
 
   constructor() {}
 
-  async start() {
+  public async start() {
     try {
       this.browser = await puppeteer.launch({
         headless: false,
@@ -17,7 +17,7 @@ export default class Browser {
     }
   }
 
-  async open(url: String) {
+  public async open(url: String) {
     try {
       await this.page.goto(url);
     } catch (error) {
@@ -25,16 +25,24 @@ export default class Browser {
     }
   }
 
-  async fill(selector, value) {
+  public async fill(selector, value) {
     await this.page.focus(selector);
     await this.page.type(value);
   }
 
-  async click(selector) {
+  public async click(selector) {
     await this.page.click(selector);
   }
 
-  async close() {
+  public async measure(): Promise<object> {
+    const resultString = await this.page.evaluate(_ => {
+      return JSON.stringify(window.performance.timing);
+    });
+
+    return JSON.parse(resultString);
+  }
+
+  public async close() {
     try {
       await this.page.close();
       await this.browser.close();
