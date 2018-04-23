@@ -9,6 +9,7 @@
     "lint": "tslint"
   },
   "dependencies": {
+    "lighthouse": "^2.9.4",
     "puppeteer": "^1.3.0",
     "ts-node": "^6.0.0",
     "tslint": "^5.9.1",
