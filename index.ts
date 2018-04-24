@@ -1,9 +1,9 @@
 import * as EventEmitter from "events";
 
-import Browser from "./Browser";
-import TestInterface from "./Interfaces/TestInterface";
-import Store from "./Store";
-import Test from "./Test";
+import Browser from "./lib/Browser";
+import TestInterface from "./lib/Interfaces/TestInterface";
+import Store from "./lib/Store";
+import Test from "./lib/Test";
 
 export default class Lhp extends EventEmitter {
   private session: Browser;
@@ -16,6 +16,7 @@ export default class Lhp extends EventEmitter {
     this.test = new Test(this.session, this.tests);
 
     this.session.on("error", this.handleError.bind(this));
+    this.session.on("info", this.handleInfo.bind(this));
     this.test.on("error", this.handleError.bind(this));
     this.test.on("info", this.handleInfo.bind(this));
   }
