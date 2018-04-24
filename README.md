@@ -8,11 +8,11 @@ You need to write your tests like to match the interface
 An easy example:
 
 ```typescript
-import * as fs from "fs"
-import * as path from "path"
 import MetricsPli, { ConfigInterface, TestInterface } from "@metrics-pli/core";
+import * as fs from "fs";
+import * as path from "path";
 
-const tests: TestAction[] = [{
+const tests: TestInterface[] = [{
   url: "https://google.com/",
 }];
 
