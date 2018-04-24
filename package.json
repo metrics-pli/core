@@ -1,9 +1,13 @@
 {
-  "name": "lhp",
-  "version": "1.0.0",
+  "name": "@metrics-pli/core",
+  "description": "Get metrics from a real browser using Puppeteer and Lighthouse",
+  "version": "0.1.0",
   "main": "dist/index.js",
   "license": "MIT",
-  "private": false,
+  "author": "Hans Christian Reinl <info@drublic.de> (https://drublic.de)",
+  "repository": {
+    "url": "https://github.com/metrics-pli/core.git"
+  },
   "scripts": {
     "start": "ts-node __tests__/index.ts",
     "lint": "tslint"
@@ -17,5 +21,8 @@
   },
   "devDependencies": {
     "@types/node": "^9.6.6"
+  },
+  "directories": {
+    "lib": "lib"
   }
 }
