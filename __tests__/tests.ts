@@ -12,12 +12,11 @@ const tests: TestInterface[] = [{
     name: TYPES.FILL,
   }, {
     content: [
-      "#login [type=\"submit\"",
+      "#login [type=\"submit\"]",
     ],
     name: TYPES.CLICK,
   }, {
-    await: 3000,
-    name: TYPES.WAIT,
+    name: TYPES.WAIT_FOR_NAVIGATION,
   }],
   url: "https://www.npmjs.com/login",
 }, {

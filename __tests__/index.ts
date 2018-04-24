@@ -21,5 +21,5 @@ import tests from "./tests";
     fs.writeFileSync(saveToFilepath, JSON.stringify(results), "utf-8");
   });
 
-  metricsPli.run();
+  await metricsPli.run();
 })();

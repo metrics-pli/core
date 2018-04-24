@@ -22,26 +22,30 @@ export default class Test extends EventEmitter {
     }
   }
 
+  private async fill(content: Array<[string, string]>, index: number = 0) {
+    const state: [string, string] = content[index];
+
+    await this.session.fill(state[0], state[1]);
+
+    if (content[index + 1]) {
+      await this.fill(content, index + 1);
+    }
+  }
+
   private async runAction(action: TestActionInterface) {
     super.emit("info", `  Running action ${action.name}`);
 
     switch (action.name) {
       case TYPES.FILL:
-        (action.content as Array<[string, string]>).forEach(async (state) => {
-          if (state.constructor === Array) {
-            await this.session.fill(state[0], state[1]);
-          }
-        });
+        await this.fill(action.content as Array<[string, string]>);
         break;
 
       case TYPES.CLICK:
         await this.session.click(action.content);
         break;
 
-      case TYPES.WAIT:
-        await new Promise((resolve) => {
-          setTimeout(() => resolve(), action.await);
-        });
+      case TYPES.WAIT_FOR_NAVIGATION:
+        await this.session.waitForNavigation();
         break;
 
       default:
@@ -49,7 +53,7 @@ export default class Test extends EventEmitter {
     }
   }
 
-  private async runNextAction(actions: TestActionInterface[], key: number) {
+  private async runNextAction(actions: TestActionInterface[], key: number = 0) {
     await this.runAction(actions[key]);
 
     if (actions[key + 1]) {
@@ -71,7 +75,7 @@ export default class Test extends EventEmitter {
     });
 
     if (test.actions) {
-      this.runNextAction(test.actions, 0);
+      await this.runNextAction(test.actions);
     }
   }
 }

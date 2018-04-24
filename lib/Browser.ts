@@ -36,12 +36,17 @@ export default class Browser extends EventEmitter {
   }
 
   public async fill(selector, value) {
-    await this.page.focus(selector);
-    await this.page.type(value);
+    await this.page.evaluate((inputSelector, inputValue) => {
+      document.querySelector(inputSelector).value = inputValue;
+    }, selector, value);
   }
 
   public async click(selector) {
     await this.page.click(selector);
+  }
+
+  public async waitForNavigation() {
+    await this.page.waitForNavigation();
   }
 
   public async getMetrics(): Promise<object> {
