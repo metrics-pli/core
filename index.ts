@@ -21,14 +21,13 @@ export default class MetricsPli extends EventEmitter {
     this.session.on("info", this.handleInfo.bind(this));
     this.test.on("error", this.handleError.bind(this));
     this.test.on("info", this.handleInfo.bind(this));
+    this.test.on("data", this.handleData.bind(this));
   }
 
   public async run() {
     await this.session.start();
     await this.test.run();
     await this.session.close();
-
-    super.emit("data", Store.getAll());
   }
 
   private handleError(error: Error): void {
@@ -37,5 +36,9 @@ export default class MetricsPli extends EventEmitter {
 
   private handleInfo(info: Error): void {
     super.emit("info", info);
+  }
+
+  private handleData(data: Error): void {
+    super.emit("data", data);
   }
 }

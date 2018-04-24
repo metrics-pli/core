@@ -62,6 +62,11 @@ export default class Test extends EventEmitter {
     const performanceData = await this.session.getMetrics();
     Store.set(test.url, performanceData);
 
+    super.emit("data", {
+      results: performanceData,
+      test,
+    });
+
     if (test.actions) {
       this.runNextAction(test.actions, 0);
     }

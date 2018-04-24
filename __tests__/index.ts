@@ -6,12 +6,16 @@ import MetricsPli from "../index";
 import tests from "./tests";
 
 (async () => {
-  const saveToFilepath = path.resolve(__dirname, "metrics/test.json");
   const metricsPli = new MetricsPli(tests);
 
   metricsPli.on("error", console.error);
   metricsPli.on("info", console.info);
-  metricsPli.on("data", (results) => {
+  metricsPli.on("data", ({ results, test }) => {
+    const saveToFilepath = path.resolve(
+      __dirname,
+      `metrics/test-${encodeURIComponent(test.url)}.json`,
+    );
+
     fs.writeFileSync(saveToFilepath, JSON.stringify(results), "utf-8");
   });
 

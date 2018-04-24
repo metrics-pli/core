@@ -22,7 +22,7 @@ const tests: TestAction[] = [{
 
   metricsPli.on("error", console.error);
   metricsPli.on("info", console.info);
-  metricsPli.on("data", (results) => {
+  metricsPli.on("data", ({ results, test }) => {
     fs.writeFileSync(saveToFilepath, JSON.stringify(results), "utf-8");
   });
 
