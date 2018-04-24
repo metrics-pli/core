@@ -1,19 +1,19 @@
 import * as fs from "fs";
 import * as path from "path";
 
-import Lhp from "../index";
+import MetricsPli from "../index";
 
 import tests from "./tests";
 
 (async () => {
-  const lhp = new Lhp(tests);
+  const saveToFilepath = path.resolve(__dirname, "metrics/test.json");
+  const metricsPli = new MetricsPli(tests);
 
-  lhp.on("error", console.error);
-  lhp.on("info", console.info);
-  lhp.on("data", (results) => {
-    const filepath = path.resolve(__dirname, "test.json");
-    fs.writeFileSync(filepath, JSON.stringify(results), "utf-8");
+  metricsPli.on("error", console.error);
+  metricsPli.on("info", console.info);
+  metricsPli.on("data", (results) => {
+    fs.writeFileSync(saveToFilepath, JSON.stringify(results), "utf-8");
   });
 
-  lhp.run();
+  metricsPli.run();
 })();

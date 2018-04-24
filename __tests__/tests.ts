@@ -1,5 +1,5 @@
+import { TestInterface } from "../index";
 import { TYPES } from "../lib/constants";
-import TestInterface from "../lib/Interfaces/TestInterface";
 
 const tests: TestInterface[] = [{
   url: "https://npmjs.com",

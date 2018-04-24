@@ -5,7 +5,9 @@ import TestInterface from "./lib/Interfaces/TestInterface";
 import Store from "./lib/Store";
 import Test from "./lib/Test";
 
-export default class Lhp extends EventEmitter {
+export { default as TestInterface } from "./lib/Interfaces/TestInterface";
+
+export default class MetricsPli extends EventEmitter {
   private session: Browser;
   private test: Test;
 
