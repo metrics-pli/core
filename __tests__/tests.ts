@@ -2,6 +2,7 @@ import { TestInterface } from "../index";
 import { TYPES } from "../lib/constants";
 
 const tests: TestInterface[] = [{
+  name: "homepage",
   url: "https://npmjs.com",
 }, {
   actions: [{
@@ -18,8 +19,10 @@ const tests: TestInterface[] = [{
   }, {
     name: TYPES.WAIT_FOR_NAVIGATION,
   }],
+  name: "login",
   url: "https://www.npmjs.com/login",
-}, {
+  }, {
+  name: "package",
   url: "https://www.npmjs.com/package/lodash",
 }];
 

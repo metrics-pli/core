@@ -9,18 +9,32 @@ export default class Measure {
     this.port = (new URL(browser.wsEndpoint())).port;
   }
 
-  public async run(url: string, basicOnly: boolean = false): Promise<object> {
+  public async run(
+    url: string,
+    basicOnly: boolean = false,
+    includeFilmstrip: boolean = false,
+  ): Promise<object> {
     if (basicOnly) {
       return await this.runBasic(url);
     }
 
     return {
-      advanced: await this.runAdvanced(url),
+      advanced: await this.runAdvanced(url, includeFilmstrip),
       basic: await this.runBasic(url),
     };
   }
 
-  public async runAdvanced(url: string): Promise<object> {
+  public async runAdvanced(url: string, includeFilmstrip: boolean): Promise<object> {
+    const settings: any = {
+      onlyCategories: ["performance"],
+    };
+
+    if (!includeFilmstrip) {
+      settings.skipAudits = [
+        "screenshot-thumbnails",
+      ];
+    }
+
     const results = await lighthouse(url, {
       "disable-gpu": true,
       "headless": true,
@@ -29,10 +43,10 @@ export default class Measure {
       "port": this.port,
     }, {
       extends: "lighthouse:default",
-      settings: {
-        onlyCategories: ["performance"],
-      },
+      settings,
     });
+
+    delete results.artifacts;
 
     return results;
   }

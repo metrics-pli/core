@@ -13,6 +13,7 @@ import * as fs from "fs";
 import * as path from "path";
 
 const tests: TestInterface[] = [{
+  name: "Homepage",
   url: "https://google.com/",
 }];
 

@@ -17,7 +17,7 @@ export default class Browser extends EventEmitter {
   public async start() {
     try {
       this.browser = await puppeteer.launch({
-        headless: false,
+        headless: true,
       });
       this.page = await this.browser.newPage();
     } catch (error) {
@@ -55,9 +55,10 @@ export default class Browser extends EventEmitter {
     super.emit("info", "  Collecting metrics…");
 
     const basicOnly: boolean = !!(this.config && this.config.basicOnly);
+    const includeFilmstrip: boolean = !!(this.config && this.config.includeFilmstrip);
 
     try {
-      return await this.measure.run(this.url, basicOnly);
+      return await this.measure.run(this.url, basicOnly, includeFilmstrip);
     } catch (error) {
       this.throw(error);
     }
