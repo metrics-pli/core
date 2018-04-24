@@ -10,7 +10,9 @@
   },
   "scripts": {
     "start": "ts-node __tests__/index.ts",
-    "lint": "tslint"
+    "lint": "tslint",
+    "build": "tsc",
+    "prepublishOnly": "yarn build"
   },
   "dependencies": {
     "lighthouse": "^2.9.4",
