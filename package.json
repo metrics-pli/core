@@ -26,5 +26,14 @@
   },
   "directories": {
     "lib": "lib"
-  }
+  },
+  "keywords": [
+    "metrics",
+    "lighthouse",
+    "puppeteer",
+    "tests",
+    "chrome-headless",
+    "chrome",
+    "headless-browsers"
+  ]
 }
