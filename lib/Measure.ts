@@ -2,6 +2,9 @@ import * as lighthouse from "lighthouse";
 import * as puppeteer from "puppeteer";
 import { URL } from "url";
 
+import ResultsetAdvancedInterface from "./Interfaces/ResultsetAdvancedInterface";
+import ResultsetInterface from "./Interfaces/ResultsetInterface";
+
 export default class Measure {
   private port: string;
 
@@ -13,9 +16,11 @@ export default class Measure {
     url: string,
     basicOnly: boolean = false,
     includeFilmstrip: boolean = false,
-  ): Promise<object> {
+  ): Promise<ResultsetInterface> {
     if (basicOnly) {
-      return await this.runBasic(url);
+      return {
+        basic: await this.runBasic(url),
+      };
     }
 
     return {
@@ -24,7 +29,10 @@ export default class Measure {
     };
   }
 
-  public async runAdvanced(url: string, includeFilmstrip: boolean): Promise<object> {
+  public async runAdvanced(
+    url: string,
+    includeFilmstrip: boolean,
+  ): Promise<ResultsetAdvancedInterface> {
     const settings: any = {
       onlyCategories: ["performance"],
     };
@@ -46,16 +54,44 @@ export default class Measure {
       settings,
     });
 
-    delete results.artifacts;
-
-    return results;
+    return this.mapResult(results);
   }
 
-  public async runBasic(url: string) {
+  public async runBasic(url: string): Promise<object> {
     const resultString = await this.page.evaluate((_) => {
       return JSON.stringify(window.performance.timing);
     });
 
     return JSON.parse(resultString);
+  }
+
+  private mapResult(result: any): ResultsetAdvancedInterface {
+    delete result.artifacts;
+    delete result.reportGroups;
+    delete result.reportCategories;
+
+    const audits: any = [];
+
+    for (const key in result.audits) {
+      if (result.audits[key]) {
+        const audit = result.audits[key];
+
+        audits.push({
+          description: audit.description,
+          displayValue: audit.displayValue,
+          id: key,
+          rawValue: audit.rawValue,
+          score: audit.score,
+        });
+      }
+    }
+
+    return {
+      audits,
+      fullResult: result,
+      generatedTime: result.generatedTime,
+      initialUrl: result.initialUrl,
+      url: result.url,
+    };
   }
 }

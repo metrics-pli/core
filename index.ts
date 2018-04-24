@@ -6,6 +6,8 @@ import TestInterface from "./lib/Interfaces/TestInterface";
 import Store from "./lib/Store";
 import Test from "./lib/Test";
 
+export { default as ResultsetAdvancedInterface } from "./lib/Interfaces/ResultsetAdvancedInterface";
+export { default as ResultsetInterface } from "./lib/Interfaces/ResultsetInterface";
 export { default as TestInterface } from "./lib/Interfaces/TestInterface";
 export { default as ConfigInterface } from "./lib/Interfaces/ConfigInterface";
 

@@ -25,8 +25,10 @@ const config: ConfigInterface = {};
 
   metricsPli.on("error", console.error);
   metricsPli.on("info", console.info);
-  metricsPli.on("data", ({ results, test }) => {
-    fs.writeFileSync(saveToFilepath, JSON.stringify(results), "utf-8");
+  metricsPli.on("data", ({ result, test }) => {
+    // result is of type ResultsetInterface
+    // test is of type TestInterface
+    fs.writeFileSync(saveToFilepath, JSON.stringify(result), "utf-8");
   });
 
   metricsPli.run();
