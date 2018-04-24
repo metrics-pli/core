@@ -6,7 +6,9 @@ import MetricsPli from "../index";
 import tests from "./tests";
 
 (async () => {
-  const metricsPli = new MetricsPli(tests);
+  const metricsPli = new MetricsPli(tests, {
+    basicOnly: true,
+  });
 
   metricsPli.on("error", console.error);
   metricsPli.on("info", console.info);

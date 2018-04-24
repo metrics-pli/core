@@ -7,7 +7,10 @@ import TestInterface from "./Interfaces/TestInterface";
 import Store from "./Store";
 
 export default class Test extends EventEmitter {
-  constructor(private session: Browser, private tests: TestInterface[]) {
+  constructor(
+    private session: Browser,
+    private tests: TestInterface[],
+  ) {
     super();
   }
 

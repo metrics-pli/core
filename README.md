@@ -10,15 +10,17 @@ An easy example:
 ```typescript
 import * as fs from "fs"
 import * as path from "path"
-import MetricsPli, { TestInterface } from "@metrics-pli/core";
+import MetricsPli, { ConfigInterface, TestInterface } from "@metrics-pli/core";
 
 const tests: TestAction[] = [{
   url: "https://google.com/",
 }];
 
+const config: ConfigInterface = {};
+
 (async () => {
   const saveToFilepath = path.resolve(__dirname, "test.json");
-  const metricsPli = new MetricsPli(tests);
+  const metricsPli = new MetricsPli(tests, config);
 
   metricsPli.on("error", console.error);
   metricsPli.on("info", console.info);

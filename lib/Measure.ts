@@ -9,7 +9,11 @@ export default class Measure {
     this.port = (new URL(browser.wsEndpoint())).port;
   }
 
-  public async run(url: string): Promise<object> {
+  public async run(url: string, basicOnly: boolean = false): Promise<object> {
+    if (basicOnly) {
+      return await this.runBasic(url);
+    }
+
     return {
       advanced: await this.runAdvanced(url),
       basic: await this.runBasic(url),

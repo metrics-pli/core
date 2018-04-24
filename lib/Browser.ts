@@ -1,6 +1,7 @@
 import * as EventEmitter from "events";
 import * as puppeteer from "puppeteer";
 
+import ConfigInterface from "./Interfaces/ConfigInterface";
 import Measure from "./Measure";
 
 export default class Browser extends EventEmitter {
@@ -9,7 +10,7 @@ export default class Browser extends EventEmitter {
   private measure;
   private url: string = "";
 
-  constructor() {
+  constructor(private config?: ConfigInterface) {
     super();
   }
 
@@ -48,8 +49,10 @@ export default class Browser extends EventEmitter {
 
     super.emit("info", "  Collecting metrics…");
 
+    const basicOnly: boolean = !!(this.config && this.config.basicOnly);
+
     try {
-      return await this.measure.run(this.url);
+      return await this.measure.run(this.url, basicOnly);
     } catch (error) {
       this.throw(error);
     }
