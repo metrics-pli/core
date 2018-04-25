@@ -10,6 +10,7 @@ export { default as ResultsetAdvancedInterface } from "./lib/Interfaces/Resultse
 export { default as ResultsetInterface } from "./lib/Interfaces/ResultsetInterface";
 export { default as TestInterface } from "./lib/Interfaces/TestInterface";
 export { default as ConfigInterface } from "./lib/Interfaces/ConfigInterface";
+export { TYPES as ACTION_TYPES } from "./lib/constants";
 
 export default class MetricsPli extends EventEmitter {
   private session: Browser;
