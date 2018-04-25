@@ -35,18 +35,30 @@ export default class Browser extends EventEmitter {
     }
   }
 
-  public async fill(selector, value) {
+  public async fill(selector: string, value: string) {
     await this.page.evaluate((inputSelector, inputValue) => {
       document.querySelector(inputSelector).value = inputValue;
     }, selector, value);
   }
 
-  public async click(selector) {
+  public async click(selector: string) {
     await this.page.click(selector);
   }
 
   public async waitForNavigation() {
     await this.page.waitForNavigation();
+  }
+
+  public async triggerEvent(selector: string, eventName: string, data?: any) {
+    await this.page.evaluate((inputSelector, inputEventName, inputData) => {
+      const element = document.querySelector(inputSelector);
+      const event = new CustomEvent(inputEventName, {
+        bubbles: true,
+        detail: inputData,
+      });
+
+      element.dispatchEvent(event);
+    }, selector, eventName, data);
   }
 
   public async getMetrics(): Promise<object> {

@@ -2,7 +2,7 @@ import * as EventEmitter from "events";
 
 import Browser from "./Browser";
 import { TYPES } from "./constants";
-import TestActionInterface from "./Interfaces/TestActionInterface";
+import TestActionInterface, { EventContent } from "./Interfaces/TestActionInterface";
 import TestInterface from "./Interfaces/TestInterface";
 import Store from "./Store";
 
@@ -41,7 +41,13 @@ export default class Test extends EventEmitter {
         break;
 
       case TYPES.CLICK:
-        await this.session.click(action.content);
+        await this.session.click(action.content as string);
+        break;
+
+      case TYPES.TRIGGER_EVENT:
+        const { selector, eventName, data } = action.content as EventContent;
+
+        await this.session.triggerEvent(selector, eventName, data);
         break;
 
       case TYPES.WAIT_FOR_NAVIGATION:

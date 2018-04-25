@@ -12,6 +12,12 @@ const tests: TestInterface[] = [{
     ],
     name: TYPES.FILL,
   }, {
+    content: {
+      eventName: "input",
+      selector: "#login_password",
+    },
+    name: TYPES.TRIGGER_EVENT,
+  }, {
     name: TYPES.WAIT,
     timeout: 2000,
   }, {
