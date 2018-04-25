@@ -48,6 +48,12 @@ export default class Test extends EventEmitter {
         await this.session.waitForNavigation();
         break;
 
+      case TYPES.WAIT:
+        await new Promise((resolve) => {
+          setTimeout(resolve, action.timeout);
+        });
+        break;
+
       default:
         break;
     }

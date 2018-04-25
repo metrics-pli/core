@@ -12,6 +12,9 @@ const tests: TestInterface[] = [{
     ],
     name: TYPES.FILL,
   }, {
+    name: TYPES.WAIT,
+    timeout: 2000,
+  }, {
     content: [
       "#login [type=\"submit\"]",
     ],
