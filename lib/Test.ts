@@ -41,7 +41,14 @@ export default class Test extends EventEmitter {
         break;
 
       case TYPES.CLICK:
-        await this.session.click(action.content as string);
+        let clickElements: string | string[] = action.content as string | string[];
+
+        if (clickElements && typeof clickElements === "string") {
+          clickElements = [clickElements];
+        }
+
+        await this.session.clicks(clickElements as string[]);
+
         break;
 
       case TYPES.TRIGGER_EVENT:

@@ -15,9 +15,15 @@ export default class Browser extends EventEmitter {
   }
 
   public async start() {
+    let headless: boolean = true;
+
+    if (this.config && this.config.headless === false) {
+      headless = false;
+    }
+
     try {
       this.browser = await puppeteer.launch({
-        headless: true,
+        headless,
       });
       this.page = await this.browser.newPage();
     } catch (error) {
@@ -41,8 +47,8 @@ export default class Browser extends EventEmitter {
     }, selector, value);
   }
 
-  public async click(selector: string) {
-    await this.page.click(selector);
+  public async clicks(selectors: string[]) {
+    await this.nextClick(selectors);
   }
 
   public async waitForNavigation() {
@@ -89,5 +95,15 @@ export default class Browser extends EventEmitter {
 
   public throw(error) {
     super.emit("error", error);
+  }
+
+  private async nextClick(selectors: string[], index: number = 0) {
+    if (selectors[index]) {
+      await this.page.click(selectors[index]);
+    }
+
+    if (selectors[index + 1]) {
+      await this.nextClick(selectors, index + 1);
+    }
   }
 }
