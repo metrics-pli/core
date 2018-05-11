@@ -5,7 +5,7 @@
 You need to write your tests like to match the interface
 [`TestInterface`](./lib/interfaces/TestInterface.ts).
 
-An easy example:
+An example:
 
 ```typescript
 import MetricsPli, { ConfigInterface, TestInterface } from "@metrics-pli/core";
