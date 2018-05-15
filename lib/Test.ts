@@ -1,9 +1,12 @@
+import {
+  EventContent,
+  TestActionInterface,
+  TestInterface,
+} from "@metrics-pli/types";
 import * as EventEmitter from "events";
 
 import Browser from "./Browser";
 import { TYPES } from "./constants";
-import TestActionInterface, { EventContent } from "./Interfaces/TestActionInterface";
-import TestInterface from "./Interfaces/TestInterface";
 import Store from "./Store";
 
 export default class Test extends EventEmitter {

@@ -1,4 +1,4 @@
-import { TestInterface } from "../index";
+import { TestInterface } from "@metrics-pli/types";
 import { TYPES } from "../lib/constants";
 
 const tests: TestInterface[] = [{

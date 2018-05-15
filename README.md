@@ -2,13 +2,18 @@
 
 ## Usage
 
-You need to write your tests like to match the interface
-[`TestInterface`](./lib/interfaces/TestInterface.ts).
+Install via npm
+
+    npm i @metrics-pli/core @metrics-pli/types
+
+You need to write your tests like to match the interface `TestInterface`.
 
 An example:
 
 ```typescript
-import MetricsPli, { ConfigInterface, TestInterface } from "@metrics-pli/core";
+import MetricsPli from "@metrics-pli/core";
+import { ConfigInterface, TestInterface } from "@metrics-pli/types";
+
 import * as fs from "fs";
 import * as path from "path";
 

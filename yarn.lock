@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@metrics-pli/types@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@metrics-pli/types/-/types-1.0.0.tgz#ca49e4411f797411e57ba4c91a3ff300e942c92e"
+
 "@types/core-js@^0.9.41":
   version "0.9.46"
   resolved "https://registry.yarnpkg.com/@types/core-js/-/core-js-0.9.46.tgz#ea701ee34cbb6dfe6d100f1530319547c93c8d79"

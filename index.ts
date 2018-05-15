@@ -1,22 +1,23 @@
+import {
+  ConfigInterface,
+  TestInterface,
+} from "@metrics-pli/types";
 import * as EventEmitter from "events";
 
 import Browser from "./lib/Browser";
-import ConfigInterface from "./lib/Interfaces/ConfigInterface";
-import TestInterface from "./lib/Interfaces/TestInterface";
 import Store from "./lib/Store";
 import Test from "./lib/Test";
 
-export { default as ResultsetAdvancedInterface } from "./lib/Interfaces/ResultsetAdvancedInterface";
-export { default as ResultsetInterface } from "./lib/Interfaces/ResultsetInterface";
-export { default as TestInterface } from "./lib/Interfaces/TestInterface";
-export { default as ConfigInterface } from "./lib/Interfaces/ConfigInterface";
 export { TYPES as ACTION_TYPES } from "./lib/constants";
 
 export default class MetricsPli extends EventEmitter {
   private session: Browser;
   private test: Test;
 
-  constructor(private tests: TestInterface[], private config?: ConfigInterface) {
+  constructor(
+    private tests: TestInterface[],
+    private config?: ConfigInterface,
+  ) {
     super();
 
     this.session = new Browser(this.config);

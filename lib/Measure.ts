@@ -1,9 +1,10 @@
+import {
+  ResultsetAdvancedInterface,
+  ResultsetInterface,
+} from "@metrics-pli/types";
 import * as lighthouse from "lighthouse";
 import * as puppeteer from "puppeteer";
 import { URL } from "url";
-
-import ResultsetAdvancedInterface from "./Interfaces/ResultsetAdvancedInterface";
-import ResultsetInterface from "./Interfaces/ResultsetInterface";
 
 export default class Measure {
   private port: string;

@@ -1,7 +1,7 @@
+import { ConfigInterface } from "@metrics-pli/types";
 import * as EventEmitter from "events";
 import * as puppeteer from "puppeteer";
 
-import ConfigInterface from "./Interfaces/ConfigInterface";
 import Measure from "./Measure";
 
 export default class Browser extends EventEmitter {
