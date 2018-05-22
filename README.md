@@ -29,7 +29,6 @@ const config: ConfigInterface = {};
   const metricsPli = new MetricsPli(tests, config);
 
   metricsPli.on("error", console.error);
-  metricsPli.on("info", console.info);
   metricsPli.on("data", ({ result, test }) => {
     // result is of type ResultsetInterface
     // test is of type TestInterface

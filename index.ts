@@ -24,9 +24,7 @@ export default class MetricsPli extends EventEmitter {
     this.test = new Test(this.session, this.tests);
 
     this.session.on("error", this.handleError.bind(this));
-    this.session.on("info", this.handleInfo.bind(this));
     this.test.on("error", this.handleError.bind(this));
-    this.test.on("info", this.handleInfo.bind(this));
     this.test.on("data", this.handleData.bind(this));
   }
 
@@ -38,10 +36,6 @@ export default class MetricsPli extends EventEmitter {
 
   private handleError(error: Error): void {
     super.emit("error", error);
-  }
-
-  private handleInfo(info: Error): void {
-    super.emit("info", info);
   }
 
   private handleData(data: Error): void {

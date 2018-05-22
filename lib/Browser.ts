@@ -1,8 +1,11 @@
 import { ConfigInterface } from "@metrics-pli/types";
+import * as Debug from "debug";
 import * as EventEmitter from "events";
 import * as puppeteer from "puppeteer";
 
 import Measure from "./Measure";
+
+const debug = Debug("mpli:core");
 
 export default class Browser extends EventEmitter {
   private browser;
@@ -70,7 +73,7 @@ export default class Browser extends EventEmitter {
   public async getMetrics(): Promise<object> {
     this.measure = new Measure(this.browser, this.page);
 
-    super.emit("info", "  Collecting metrics…");
+    debug("Collecting metrics…");
 
     const basicOnly: boolean = !!(this.config && this.config.basicOnly);
     const includeFilmstrip: boolean = !!(this.config && this.config.includeFilmstrip);

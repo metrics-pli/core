@@ -9,7 +9,6 @@ import tests from "./tests";
   const metricsPli = new MetricsPli(tests);
 
   metricsPli.on("error", console.error);
-  metricsPli.on("info", console.info);
   metricsPli.on("data", ({ results, test }) => {
     const saveToFilepath = path.resolve(
       __dirname,

@@ -3,11 +3,14 @@ import {
   TestActionInterface,
   TestInterface,
 } from "@metrics-pli/types";
+import * as Debug from "debug";
 import * as EventEmitter from "events";
 
 import Browser from "./Browser";
 import { TYPES } from "./constants";
 import Store from "./Store";
+
+const debug = Debug("mpli:core");
 
 export default class Test extends EventEmitter {
   constructor(
@@ -36,7 +39,7 @@ export default class Test extends EventEmitter {
   }
 
   private async runAction(action: TestActionInterface) {
-    super.emit("info", `  Running action ${action.name}`);
+    debug(`Running action ${action.name}`);
 
     switch (action.name) {
       case TYPES.FILL:
@@ -84,7 +87,7 @@ export default class Test extends EventEmitter {
   }
 
   private async runTest(test: TestInterface) {
-    super.emit("info", `Opening page ${test.url}`);
+    debug(`Opening page ${test.url}`);
 
     await this.session.open(test.url);
 
