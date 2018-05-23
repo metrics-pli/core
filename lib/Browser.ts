@@ -1,4 +1,4 @@
-import { ConfigInterface } from "@metrics-pli/types";
+import { ConfigInterface, PuppeteerLaunchOptionsInterface } from "@metrics-pli/types";
 import * as Debug from "debug";
 import * as EventEmitter from "events";
 import * as puppeteer from "puppeteer";
@@ -18,16 +18,16 @@ export default class Browser extends EventEmitter {
   }
 
   public async start() {
-    let headless: boolean = true;
+    const config = this.config || {};
+    const launchOptions: PuppeteerLaunchOptionsInterface = config.launchOptions || {};
+    launchOptions.headless = true;
 
-    if (this.config && this.config.headless === false) {
-      headless = false;
+    if (config.headless === false) {
+      launchOptions.headless = false;
     }
 
     try {
-      this.browser = await puppeteer.launch({
-        headless,
-      });
+      this.browser = await puppeteer.launch(launchOptions);
       this.page = await this.browser.newPage();
     } catch (error) {
       this.throw(error);
