@@ -1,7 +1,7 @@
 {
   "name": "@metrics-pli/core",
   "description": "Get metrics from a real browser using Puppeteer and Lighthouse",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "main": "dist/index.js",
   "license": "MIT",
   "author": "Hans Christian Reinl <info@drublic.de> (https://drublic.de)",
