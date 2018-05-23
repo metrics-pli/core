@@ -3,8 +3,8 @@
 
 
 "@metrics-pli/types@^1.0.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@metrics-pli/types/-/types-1.1.0.tgz#199db89b877380d7db2135fd14af09b237c81703"
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@metrics-pli/types/-/types-1.2.1.tgz#ffbbea2f959922471397c3f53faa9ad4e06747cf"
 
 "@types/core-js@^0.9.41":
   version "0.9.46"
