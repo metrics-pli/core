@@ -100,7 +100,11 @@ export default class Test extends EventEmitter {
     });
 
     if (test.actions) {
-      await this.runNextAction(test.actions);
+      try {
+        await this.runNextAction(test.actions);
+      } catch (error) {
+        super.emit("error", error);
+      }
     }
   }
 }

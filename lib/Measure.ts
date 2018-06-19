@@ -3,7 +3,6 @@ import {
   ResultsetInterface,
 } from "@metrics-pli/types";
 import * as lighthouse from "lighthouse";
-import * as puppeteer from "puppeteer";
 import { URL } from "url";
 
 export default class Measure {
