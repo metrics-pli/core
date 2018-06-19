@@ -89,9 +89,9 @@ export default class Test extends EventEmitter {
   private async runTest(test: TestInterface) {
     debug(`Opening page ${test.url}`);
 
+    const performanceData = await this.session.getMetrics(test.url);
     await this.session.open(test.url);
 
-    const performanceData = await this.session.getMetrics();
     Store.set(test.url, performanceData);
 
     super.emit("data", {

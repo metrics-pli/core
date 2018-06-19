@@ -5,7 +5,6 @@ import {
 import * as EventEmitter from "events";
 
 import Browser from "./lib/Browser";
-import Store from "./lib/Store";
 import Test from "./lib/Test";
 
 export { TYPES as ACTION_TYPES } from "./lib/constants";

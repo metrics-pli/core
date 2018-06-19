@@ -11,7 +11,6 @@ export default class Browser extends EventEmitter {
   private browser;
   private page;
   private measure;
-  private url: string = "";
 
   constructor(private config?: ConfigInterface) {
     super();
@@ -35,8 +34,6 @@ export default class Browser extends EventEmitter {
   }
 
   public async open(url: string) {
-    this.url = url;
-
     try {
       await this.page.goto(url);
     } catch (error) {
@@ -70,16 +67,16 @@ export default class Browser extends EventEmitter {
     }, selector, eventName, data);
   }
 
-  public async getMetrics(): Promise<object> {
+  public async getMetrics(url: string): Promise<object> {
     this.measure = new Measure(this.browser, this.page);
 
-    debug("Collecting metrics…");
+    debug(`Collecting metrics: ${url}`);
 
     const basicOnly: boolean = !!(this.config && this.config.basicOnly);
     const includeFilmstrip: boolean = !!(this.config && this.config.includeFilmstrip);
 
     try {
-      return await this.measure.run(this.url, basicOnly, includeFilmstrip);
+      return await this.measure.run(url, basicOnly, includeFilmstrip);
     } catch (error) {
       this.throw(error);
     }
